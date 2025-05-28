@@ -114,7 +114,7 @@ function App() {
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.4 }}
             >
-              <Dictaphone onBack={() => setView('home')} />
+              <Dictaphone />
             </motion.div>
           )}
         </AnimatePresence>
@@ -130,11 +130,7 @@ interface Response {
   reason: string;
 }
 
-interface DictaphoneProps {
-  onBack: () => void;
-}
-
-const Dictaphone = ({ onBack }: DictaphoneProps) => {
+const Dictaphone = () => {
   const [result, setResult] = useState<Response | null>(null);
   const [editableTranscript, setEditableTranscript] = useState('');
   const [isLoading, setIsLoading] = useState(false);
