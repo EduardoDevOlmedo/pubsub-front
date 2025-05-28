@@ -16,6 +16,8 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
+const API_URL = 'https://pubsub-api-549920649116.us-central1.run.app/';
+
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -152,7 +154,7 @@ const Dictaphone = () => {
     if (editableTranscript.length === 0) return;
     setIsLoading(true);
 
-    const response = await fetch('http://localhost:3000/analize-text', {
+    const response = await fetch(`${API_URL}/analize-text`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: editableTranscript }),
