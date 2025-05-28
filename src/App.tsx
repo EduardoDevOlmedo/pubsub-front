@@ -143,7 +143,19 @@ const Dictaphone = () => {
     setEditableTranscript(transcript);
   }, [transcript, listening]);
 
-  const startListening = () => {
+  const requestMicPermission = async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log('Mic permission granted');
+    } catch (err) {
+      console.log('Mic permission denied or error:', err);
+    }
+  };
+
+  const startListening = async () => {
+    await requestMicPermission();
+    console.log('Mic permission granted');
+    console.log('Starting listening');
     SpeechRecognition.startListening({
       continuous: true,
       language: 'es-ES',
@@ -180,7 +192,7 @@ const Dictaphone = () => {
   return (
     <Box pt={2} display="flex" flexDirection="column" gap={2} width="100%" maxWidth={700} mx="auto">
       <Typography variant="h5" gutterBottom>
-        Detección de Phishing por Voz o Texto. 
+        Detección de Phishing por Voz o Texto.
       </Typography>
 
       {listening && (
